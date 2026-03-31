@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVP Funcional</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+    .screen {
+      display: none;
+      padding: 20px;
+    }
+    .active {
+      display: block;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    input {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pantalla 1: Inicio -->
+  <div id="home" class="screen active">
+    <div class="card">
+      <h2>Bienvenido</h2>
+      <p>Este es el MVP funcional.</p>
+      <button onclick="goTo('login')">Ir a Login</button>
+      <button onclick="goTo('dashboard')">Ir al Dashboard</button>
+    </div>
+  </div>
+
+  <!-- Pantalla 2: Login -->
+  <div id="login" class="screen">
+    <div class="card">
+      <h2>Login</h2>
+      <input type="text" placeholder="Usuario" id="user">
+      <input type="password" placeholder="Contraseña" id="pass">
+      <button onclick="login()">Ingresar</button>
+      <button onclick="goTo('home')">Volver</button>
+    </div>
+  </div>
+
+  <!-- Pantalla 3: Dashboard -->
+  <div id="dashboard" class="screen">
+    <div class="card">
+      <h2>Dashboard</h2>
+      <p id="welcome"></p>
+      <button onclick="goTo('home')">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <script>
+    function goTo(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+
+    function login() {
+      const user = document.getElementById('user').value;
+      if (user.trim() === '') {
+        alert('Ingrese un usuario');
+        return;
+      }
+      document.getElementById('welcome').innerText = 'Bienvenido, ' + user;
+      goTo('dashboard');
+    }
+  </script>
+
+</body>
+</html>
